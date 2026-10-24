@@ -33,9 +33,8 @@ for target in "${items[@]}"; do
 
     echo "Compiling: target=$target name=$name CC1352P_2_OTHER=$CC1352P_2_OTHER"
     file_name="${name}_ot_rcp_${version//./_}"
-    CC1352P_2_OTHER="$CC1352P_2_OTHER" FW_VERSION="$version" ./script/build $target
-    /opt/ti/ti-cgt-armllvm_4.0.1.LTS/bin/tiarmobjcopy build/bin/ot-rcp.out \
-        --output-target ihex build/bin/$file_name.hex
+    CC1352P_2_OTHER="$CC1352P_2_OTHER" FW_VERSION="$version" bash ./script/build $target
+    arm-none-eabi-objcopy -O ihex build/bin/ot-rcp.out build/bin/$file_name.hex
     pushd build/bin
     zip $dist_dir/$file_name.zip $file_name.hex
     popd
