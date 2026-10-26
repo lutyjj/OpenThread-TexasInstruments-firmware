@@ -1,4 +1,8 @@
-#!/bin/bash -e
+#!/bin/bash
+# The README runs this as `bash scripts/build.sh`, which ignores options on
+# the #! line: a target that fails to build must stop the run, not leave the
+# previous target's image under its name.
+set -eo pipefail
 
 [ -z "$1" ] && echo "First argument is not set, set to the version, e.g. 2025.2.1" && exit 1
 version=$1
